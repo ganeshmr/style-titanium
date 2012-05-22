@@ -15,7 +15,7 @@
 
 var _s = {};
 
-Titanium.include('defaultStyles.js')
+
 
 // takes an array of style sheet file names
 function Styles(options) {
@@ -27,14 +27,18 @@ function Styles(options) {
 	this.gridGutterWidth = 20;
 
 	// now whole range of default can be used here
-	
+	Titanium.include('default_style.js');
+	var defaultNameSpace = _s['default_style'];
+	for(key in spaceName) {
+		this.styles[key] = spaceName[key];
+	}
 	
 	for(var i=0;i<options.length;i++) {
 		var fileName = options[i];
 		Titanium.include(fileName);
 		var vals = fileName.split('/');
 		var name = vals[vals.length-1];
-		var nameString = '_' + (fileName.split('.'))[0];
+		var nameString = (fileName.split('.'))[0];
 		var spaceName = _s[nameString];
 		
 		for(key in spaceName) {
@@ -51,7 +55,11 @@ function Styles(options) {
 			return range; // return what ever was passed, helpful 
 		}
 		range = arr[1];
-		return (range*this.gridColumnWidth + (range-1)*this.gridGutterWidth);
+		if(arr[0] == 'span') {
+			return (range*this.gridColumnWidth + (range-1)*this.gridGutterWidth);
+		} else if(arr[0] == 'offset') {
+			return (range*this.gridColumnWidth + (range)*this.gridGutterWidth);
+		}
 	}
 
 	
