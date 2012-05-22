@@ -1,18 +1,17 @@
-Titanium.include('styleHandler.js'); // this is always done in app.js, once
+Titanium.include('handler_style.js'); // this is always done in app.js, once
 
-var appStyle = new Styles(['appstyle.js']); // in each to apply styles
+var appStyle = new Styles(['app_style.js']); // in each to apply styles
+
 
 var win = Titanium.UI.createWindow({
-	className: 'basewin'
-	
+	backgroundImage: 'ipad-grid.png'
+
 });
 
 var button = Titanium.UI.createButton({
 	className: 'defButton',
-	title: "My Button"
+	title: "My Button",
 });
-
-win.add(button);
 
 var row = Titanium.UI.createTableViewRow({});
 
